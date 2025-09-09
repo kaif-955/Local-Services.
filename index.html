@@ -44,23 +44,29 @@
       margin-bottom: 15px;
       box-shadow: 0 2px 5px rgba(0,0,0,0.1);
       display: flex;
-      align-items: center;
+      align-items: flex-start;
       justify-content: space-between;
       flex-wrap: wrap;
     }
 
     .info {
       flex: 1;
-      min-width: 200px;
+      min-width: 220px;
     }
 
     .info h3 {
-      margin: 0 0 5px;
+      margin: 0 0 8px;
+      color: #222;
     }
 
     .info p {
-      margin: 3px 0;
-      color: #555;
+      margin: 4px 0;
+      color: #444;
+      font-size: 14px;
+    }
+
+    .info strong {
+      color: #000;
     }
 
     .info a {
@@ -69,7 +75,7 @@
     }
 
     .whatsapp-btn {
-      padding: 8px 12px;
+      padding: 8px 14px;
       background: #25D366;
       color: white;
       border: none;
@@ -77,6 +83,7 @@
       cursor: pointer;
       text-decoration: none;
       margin-top: 10px;
+      display: inline-block;
     }
 
     @media (max-width: 600px) {
@@ -101,36 +108,53 @@
 <body>
 
   <div class="search-bar">
-    <input type="text" id="searchInput" placeholder="Search by name or service...">
+    <input type="text" id="searchInput" placeholder="Search by name, service, or location...">
     <button onclick="search()">Search</button>
   </div>
 
   <div id="cardList">
+    <!-- John Doe -->
     <div class="card">
       <div class="info">
         <h3>John Doe</h3>
-        <p>📞 <a href="tel:9876543210">9876543210</a></p>
-        <p>🛠 Service: Electrician</p>
+        <p><strong>📞 Phone:</strong> <a href="tel:9876543210">9876543210</a></p>
+        <p><strong>🛠 Service:</strong> Electrician</p>
       </div>
       <a class="whatsapp-btn" href="https://wa.me/9876543210" target="_blank">WhatsApp</a>
     </div>
 
+    <!-- Priya Sharma -->
     <div class="card">
       <div class="info">
         <h3>Priya Sharma</h3>
-        <p>📞 <a href="tel:9123456780">9123456780</a></p>
-        <p>🛠 Service: Plumber</p>
+        <p><strong>📞 Phone:</strong> <a href="tel:9123456780">9123456780</a></p>
+        <p><strong>🛠 Service:</strong> Plumber</p>
       </div>
       <a class="whatsapp-btn" href="https://wa.me/9123456780" target="_blank">WhatsApp</a>
     </div>
 
+    <!-- Ramesh Kumar -->
     <div class="card">
       <div class="info">
         <h3>Ramesh Kumar</h3>
-        <p>📞 <a href="tel:9001122334">9001122334</a></p>
-        <p>🛠 Service: Carpenter</p>
+        <p><strong>📞 Phone:</strong> <a href="tel:9001122334">9001122334</a></p>
+        <p><strong>🛠 Service:</strong> Carpenter</p>
       </div>
       <a class="whatsapp-btn" href="https://wa.me/9001122334" target="_blank">WhatsApp</a>
+    </div>
+
+    <!-- Khajavali -->
+    <div class="card">
+      <div class="info">
+        <h3>Khajavali</h3>
+        <p><strong>📞 Phone:</strong> <a href="tel:9948700134">9948700134</a></p>
+        <p><strong>🛠 Service:</strong> Welder</p>
+        <p><strong>🌍 State:</strong> Andhra Pradesh</p>
+        <p><strong>🏢 District:</strong> Prakasam</p>
+        <p><strong>📍 Mandal:</strong> S.N. Padu</p>
+        <p><strong>🏠 Village:</strong> Mynampadu</p>
+      </div>
+      <a class="whatsapp-btn" href="https://wa.me/9948700134" target="_blank">WhatsApp</a>
     </div>
   </div>
 
@@ -145,10 +169,8 @@
       let found = false;
 
       cards.forEach(card => {
-        let name = card.querySelector("h3").innerText.toLowerCase();
-        let service = card.querySelector("p:nth-child(3)").innerText.toLowerCase();
-
-        if (name.includes(input) || service.includes(input)) {
+        let text = card.innerText.toLowerCase(); // 🔍 Search all details
+        if (text.includes(input)) {
           card.style.display = "flex";
           found = true;
         } else {
@@ -159,7 +181,7 @@
       document.getElementById("noResults").style.display = found ? "none" : "block";
     }
 
-    // 🔍 Enable live search as you type
+    // 🔍 Live search as user types
     document.getElementById("searchInput").addEventListener("keyup", search);
   </script>
 
