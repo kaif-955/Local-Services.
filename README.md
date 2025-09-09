@@ -5,77 +5,186 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Smart Local Services</title>
+  <title>Service Directory</title>
   <style>
     body {
       font-family: Arial, sans-serif;
-      background: #f4f4f4;
+      background: #f4f6f9;
       margin: 0;
-      padding: 0;
-    }
-    header {
-      background: #2c3e50;
-      color: white;
-      padding: 15px;
-      text-align: center;
-    }
-    .container {
-      width: 90%;
-      margin: auto;
       padding: 20px;
     }
-    .card {
-      background: white;
-      border-radius: 10px;
-      padding: 15px;
-      margin: 15px 0;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+
+    .search-bar {
+      width: 100%;
+      max-width: 500px;
+      margin: 0 auto 20px;
+      display: flex;
     }
-    .card h3 {
-      margin: 0;
-      color: #2c3e50;
+
+    .search-bar input {
+      flex: 1;
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 8px 0 0 8px;
+      outline: none;
     }
-    .btn {
-      display: inline-block;
-      margin: 5px 10px 0 0;
-      padding: 8px 12px;
-      border-radius: 5px;
-      text-decoration: none;
+
+    .search-bar button {
+      padding: 10px 15px;
+      border: none;
+      background: #007bff;
       color: white;
+      border-radius: 0 8px 8px 0;
+      cursor: pointer;
     }
-    .call { background: #27ae60; }
-    .whatsapp { background: #25D366; }
+
+    .card {
+      background: #fff;
+      border-radius: 12px;
+      padding: 15px;
+      margin-bottom: 15px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .info {
+      flex: 1;
+      min-width: 220px;
+    }
+
+    .info h3 {
+      margin: 0 0 8px;
+      color: #222;
+    }
+
+    .info p {
+      margin: 4px 0;
+      color: #444;
+      font-size: 14px;
+    }
+
+    .info strong {
+      color: #000;
+    }
+
+    .info a {
+      color: #007bff;
+      text-decoration: none;
+    }
+
+    .whatsapp-btn {
+      padding: 8px 14px;
+      background: #25D366;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      text-decoration: none;
+      margin-top: 10px;
+      display: inline-block;
+    }
+
+    @media (max-width: 600px) {
+      .card {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .whatsapp-btn {
+        margin-top: 10px;
+        width: 100%;
+        text-align: center;
+      }
+    }
+
+    .no-results {
+      text-align: center;
+      color: #777;
+      margin-top: 20px;
+    }
   </style>
 </head>
 <body>
 
-  <header>
-    <h1>Smart Local Services</h1>
-    <p>Find workers in your area quickly</p>
-  </header>
+  <div class="search-bar">
+    <input type="text" id="searchInput" placeholder="Search by name, service, or location...">
+    <button onclick="search()">Search</button>
+  </div>
 
-  <div class="container">
+  <div id="cardList">
+    <!-- John Doe -->
     <div class="card">
-      <h3>Ramesh - Welder</h3>
-      <p>Expert in steel and iron welding</p>
-      <a href="tel:+919876543210" class="btn call">📞 Call</a>
-      <a href="https://wa.me/919876543210" class="btn whatsapp">💬 WhatsApp</a>
+      <div class="info">
+        <h3>John Doe</h3>
+        <p><strong>📞 Phone:</strong> <a href="tel:9876543210">9876543210</a></p>
+        <p><strong>🛠 Service:</strong> Electrician</p>
+      </div>
+      <a class="whatsapp-btn" href="https://wa.me/9876543210" target="_blank">WhatsApp</a>
     </div>
 
+    <!-- Priya Sharma -->
     <div class="card">
-      <h3>Suresh - Electrician</h3>
-      <p>Home wiring and electrical repairs</p>
-      <a href="tel:+919812345678" class="btn call">📞 Call</a>
-      <a href="https://wa.me/919812345678" class="btn whatsapp">💬 WhatsApp</a>
+      <div class="info">
+        <h3>Priya Sharma</h3>
+        <p><strong>📞 Phone:</strong> <a href="tel:9123456780">9123456780</a></p>
+        <p><strong>🛠 Service:</strong> Plumber</p>
+      </div>
+      <a class="whatsapp-btn" href="https://wa.me/9123456780" target="_blank">WhatsApp</a>
     </div>
 
+    <!-- Ramesh Kumar -->
     <div class="card">
-      <h3>Anita - Tailor</h3>
-      <p>Ladies & kids clothing specialist</p>
-      <a href="tel:+919800112233" class="btn call">📞 Call</a>
-      <a href="https://wa.me/919800112233" class="btn whatsapp">💬 WhatsApp</a>
+      <div class="info">
+        <h3>Ramesh Kumar</h3>
+        <p><strong>📞 Phone:</strong> <a href="tel:9001122334">9001122334</a></p>
+        <p><strong>🛠 Service:</strong> Carpenter</p>
+      </div>
+      <a class="whatsapp-btn" href="https://wa.me/9001122334" target="_blank">WhatsApp</a>
+    </div>
+
+    <!-- Khajavali -->
+    <div class="card">
+      <div class="info">
+        <h3>Khajavali</h3>
+        <p><strong>📞 Phone:</strong> <a href="tel:9948700134">9948700134</a></p>
+        <p><strong>🛠 Service:</strong> Welder</p>
+        <p><strong>🌍 State:</strong> Andhra Pradesh</p>
+        <p><strong>🏢 District:</strong> Prakasam</p>
+        <p><strong>📍 Mandal:</strong> S.N. Padu</p>
+        <p><strong>🏠 Village:</strong> Mynampadu</p>
+      </div>
+      <a class="whatsapp-btn" href="https://wa.me/9948700134" target="_blank">WhatsApp</a>
     </div>
   </div>
+
+  <div id="noResults" class="no-results" style="display: none;">
+    No results found 🔍
+  </div>
+
+  <script>
+    function search() {
+      let input = document.getElementById("searchInput").value.toLowerCase();
+      let cards = document.querySelectorAll(".card");
+      let found = false;
+
+      cards.forEach(card => {
+        let text = card.innerText.toLowerCase(); // 🔍 Search all details
+        if (text.includes(input)) {
+          card.style.display = "flex";
+          found = true;
+        } else {
+          card.style.display = "none";
+        }
+      });
+
+      document.getElementById("noResults").style.display = found ? "none" : "block";
+    }
+
+    // 🔍 Live search as user types
+    document.getElementById("searchInput").addEventListener("keyup", search);
+  </script>
 
 </body>
 </html>
