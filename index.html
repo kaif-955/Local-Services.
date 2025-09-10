@@ -6,184 +6,138 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Service Directory</title>
   <style>
+    /* Reset & base */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
     body {
       font-family: Arial, sans-serif;
-      background: #f4f6f9;
-      margin: 0;
-      padding: 20px;
+      background: #f5f5f5;
+      color: #333;
     }
 
-    .search-bar {
-      width: 100%;
-      max-width: 500px;
-      margin: 0 auto 20px;
+    /* Search bar */
+    .search-container {
       display: flex;
+      padding: 10px;
+      gap: 5px;
+      background: #fff;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+      position: sticky;
+      top: 0;
+      z-index: 10;
     }
-
-    .search-bar input {
+    .search-container input {
       flex: 1;
       padding: 10px;
-      border: 1px solid #ccc;
-      border-radius: 8px 0 0 8px;
-      outline: none;
+      font-size: 14px;
+      border: 1px solid #ddd;
+      border-radius: 6px;
     }
-
-    .search-bar button {
+    .search-container button {
       padding: 10px 15px;
-      border: none;
+      font-size: 14px;
       background: #007bff;
-      color: white;
-      border-radius: 0 8px 8px 0;
+      color: #fff;
+      border: none;
+      border-radius: 6px;
       cursor: pointer;
     }
 
+    /* Cards */
     .card {
       background: #fff;
-      border-radius: 12px;
+      margin: 15px;
       padding: 15px;
-      margin-bottom: 15px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      flex-wrap: wrap;
+      border-radius: 12px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.1);
     }
-
-    .info {
-      flex: 1;
-      min-width: 220px;
+    .card h3 {
+      font-size: 18px;
+      margin-bottom: 8px;
     }
-
-    .info h3 {
-      margin: 0 0 8px;
-      color: #222;
-    }
-
-    .info p {
-      margin: 4px 0;
-      color: #444;
+    .card p {
+      margin: 5px 0;
       font-size: 14px;
     }
-
-    .info strong {
-      color: #000;
-    }
-
-    .info a {
+    .card a {
+      text-decoration: none;
       color: #007bff;
-      text-decoration: none;
     }
 
+    /* WhatsApp button */
     .whatsapp-btn {
-      padding: 8px 14px;
-      background: #25D366;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      cursor: pointer;
-      text-decoration: none;
+      display: block;
+      width: 100%;
+      padding: 12px;
       margin-top: 10px;
-      display: inline-block;
-    }
-
-    @media (max-width: 600px) {
-      .card {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      .whatsapp-btn {
-        margin-top: 10px;
-        width: 100%;
-        text-align: center;
-      }
-    }
-
-    .no-results {
+      font-size: 16px;
       text-align: center;
-      color: #777;
-      margin-top: 20px;
+      background: #25d366;
+      color: #fff;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+    }
+
+    /* Bottom nav */
+    .bottom-nav {
+      display: flex;
+      justify-content: space-around;
+      padding: 10px 0;
+      background: #fff;
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      border-top: 1px solid #ddd;
+    }
+    .bottom-nav div {
+      text-align: center;
+      font-size: 14px;
+      color: #555;
     }
   </style>
 </head>
 <body>
 
-  <div class="search-bar">
-    <input type="text" id="searchInput" placeholder="Search by name, service, or location...">
-    <button onclick="search()">Search</button>
+  <!-- Search -->
+  <div class="search-container">
+    <input type="text" placeholder="Search by name, service, or location">
+    <button>Search</button>
   </div>
 
-  <div id="cardList">
-    <!-- John Doe -->
-    <div class="card">
-      <div class="info">
-        <h3>John Doe</h3>
-        <p><strong>📞 Phone:</strong> <a href="tel:9876543210">9876543210</a></p>
-        <p><strong>🛠 Service:</strong> Electrician</p>
-      </div>
-      <a class="whatsapp-btn" href="https://wa.me/9876543210" target="_blank">WhatsApp</a>
-    </div>
-
-    <!-- Priya Sharma -->
-    <div class="card">
-      <div class="info">
-        <h3>Priya Sharma</h3>
-        <p><strong>📞 Phone:</strong> <a href="tel:9123456780">9123456780</a></p>
-        <p><strong>🛠 Service:</strong> Plumber</p>
-      </div>
-      <a class="whatsapp-btn" href="https://wa.me/9123456780" target="_blank">WhatsApp</a>
-    </div>
-
-    <!-- Ramesh Kumar -->
-    <div class="card">
-      <div class="info">
-        <h3>Ramesh Kumar</h3>
-        <p><strong>📞 Phone:</strong> <a href="tel:9001122334">9001122334</a></p>
-        <p><strong>🛠 Service:</strong> Carpenter</p>
-      </div>
-      <a class="whatsapp-btn" href="https://wa.me/9001122334" target="_blank">WhatsApp</a>
-    </div>
-
-    <!-- Khajavali -->
-    <div class="card">
-      <div class="info">
-        <h3>Khajavali</h3>
-        <p><strong>📞 Phone:</strong> <a href="tel:9948700134">9948700134</a></p>
-        <p><strong>🛠 Service:</strong> Welder</p>
-        <p><strong>🌍 State:</strong> Andhra Pradesh</p>
-        <p><strong>🏢 District:</strong> Prakasam</p>
-        <p><strong>📍 Mandal:</strong> S.N. Padu</p>
-        <p><strong>🏠 Village:</strong> Mynampadu</p>
-      </div>
-      <a class="whatsapp-btn" href="https://wa.me/9948700134" target="_blank">WhatsApp</a>
-    </div>
+  <!-- Service Cards -->
+  <div class="card">
+    <h3>John Doe</h3>
+    <p>📞 <b>Phone:</b> <a href="tel:9876543210">9876543210</a></p>
+    <p>🛠️ <b>Service:</b> Electrician</p>
+    <button class="whatsapp-btn">WhatsApp</button>
   </div>
 
-  <div id="noResults" class="no-results" style="display: none;">
-    No results found 🔍
+  <div class="card">
+    <h3>Priya Sharma</h3>
+    <p>📞 <b>Phone:</b> <a href="tel:9123456780">9123456780</a></p>
+    <p>🛠️ <b>Service:</b> Plumber</p>
+    <button class="whatsapp-btn">WhatsApp</button>
   </div>
 
-  <script>
-    function search() {
-      let input = document.getElementById("searchInput").value.toLowerCase();
-      let cards = document.querySelectorAll(".card");
-      let found = false;
+  <div class="card">
+    <h3>Ramesh Kumar</h3>
+    <p>📞 <b>Phone:</b> <a href="tel:9001122334">9001122334</a></p>
+    <p>🛠️ <b>Service:</b> Carpenter</p>
+    <button class="whatsapp-btn">WhatsApp</button>
+  </div>
 
-      cards.forEach(card => {
-        let text = card.innerText.toLowerCase(); // 🔍 Search all details
-        if (text.includes(input)) {
-          card.style.display = "flex";
-          found = true;
-        } else {
-          card.style.display = "none";
-        }
-      });
-
-      document.getElementById("noResults").style.display = found ? "none" : "block";
-    }
-
-    // 🔍 Live search as user types
-    document.getElementById("searchInput").addEventListener("keyup", search);
-  </script>
+  <!-- Bottom Navigation -->
+  <div class="bottom-nav">
+    <div>🏠 Home</div>
+    <div>🎮 Games</div>
+    <div>📑 Tabs</div>
+    <div>☰ Menu</div>
+  </div>
 
 </body>
 </html>
